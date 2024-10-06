@@ -1,0 +1,4 @@
+.vscode
+build
+example/opencv/include/
+example/opencv/lib/
