@@ -179,7 +179,6 @@ namespace Utils
     {
         Image output(width, height, input.channel);
         auto scale_x = static_cast<float>(input.width) / width, scale_y = static_cast<float>(input.height) / height;
-        auto color = new float[input.channel];
         for (auto channel = input.channel, y = 0; y < height; ++y)
         {
             for (auto x = 0; x < width; ++x)
