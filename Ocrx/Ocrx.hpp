@@ -35,11 +35,22 @@ protected:
     const Ocrx *impl;
     explicit Ocrx(Ocrx *impl) : impl(impl) {}
     Ocrx(const Ocrx &) = delete;
-    Ocrx(Ocrx &&other) : impl(other.impl) { other.impl = nullptr; }
     Ocrx &operator=(const Ocrx &) = delete;
 
 public:
+    Ocrx(Ocrx &&other) : impl(other.impl) { other.impl = nullptr; }
+    Ocrx &operator=(Ocrx &&other)
+    {
+        if (impl != other.impl)
+        {
+            delete impl;
+            impl = other.impl;
+            other.impl = nullptr;
+        }
+        return *this;
+    };
     virtual ~Ocrx() { delete impl; }
+
     virtual std::vector<Result> recognizes(const Image &rgb_image, bool rotated = false) const { return impl ? impl->recognizes(rgb_image, rotated) : std::vector<Result>{}; }
     virtual Result recognize(const Image &rgb_image) const { return impl ? impl->recognize(rgb_image) : Result{}; }
 
