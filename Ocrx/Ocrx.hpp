@@ -41,12 +41,9 @@ public:
     Ocrx(Ocrx &&other) : impl(other.impl) { other.impl = nullptr; }
     Ocrx &operator=(Ocrx &&other)
     {
-        if (impl != other.impl)
-        {
-            delete impl;
-            impl = other.impl;
-            other.impl = nullptr;
-        }
+        delete impl;
+        impl = other.impl;
+        other.impl = nullptr;
         return *this;
     };
     virtual ~Ocrx() { delete impl; }
